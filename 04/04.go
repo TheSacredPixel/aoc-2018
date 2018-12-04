@@ -6,9 +6,9 @@ import (
 	"os"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
-	"strconv"
 )
 
 const (
@@ -25,8 +25,8 @@ func main() {
 	regEvent := regexp.MustCompile(`\d+|asleep|wakes`)
 
 	days := make(map[string][]eventType)
-	guardSleepLog := make(map[int]map[int]int)//[guard][min]times
-	guardMinsSleeping := make(map[int]int)//[guard]mins
+	guardSleepLog := make(map[int]map[int]int) //[guard][min]times
+	guardMinsSleeping := make(map[int]int)     //[guard]mins
 
 	file, err := os.Open("input.txt")
 	if err != nil {
@@ -45,7 +45,6 @@ func main() {
 		if err != nil {
 			panic(err)
 		}
-
 
 		//assign times to relevant day
 		day := ""
@@ -100,7 +99,6 @@ func main() {
 	topMin, _ := findTopMin(guardSleepLog[guardID])
 
 	fmt.Println(guardID * topMin)
-
 
 	//part 2
 	//find most slept minute per guard, and lowest from all guards
